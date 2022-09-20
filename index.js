@@ -1,9 +1,9 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-//const { errors } = require('celebrate');
+const { errors } = require('celebrate');
 //const cors = require('cors');
-//const router = require('./routes/index');
+const router = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
@@ -26,7 +26,7 @@ console.log('enviroment', process.env.NODE_ENV);
   credentials: true,
 };*/
 
-mongoose.connect('mongodb://localhost:27017/mestodb');
+mongoose.connect('mongodb://localhost:27017/moviedb');
 app.use(express.json());
 //app.use('*', cors(options));
 app.use(requestLogger);
@@ -38,9 +38,9 @@ app.use(requestLogger);
 app.use(router);
 app.use(errorLogger);
 
-//app.use(errors());
+app.use(errors());
 
-/*app.use((err, req, res, next) => {
+app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;
 
   res.status(statusCode).send({
@@ -48,5 +48,5 @@ app.use(errorLogger);
   });
   next();
 });
-*/
+
 app.listen(PORT);

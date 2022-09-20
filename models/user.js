@@ -4,6 +4,12 @@ const bcrypt = require('bcryptjs');
 const AUTHORIZATION_ERROR = require('../errors/AuthorizationError');
 
 const userSchema = new mongoose.Schema({
+  name: {
+    required: true,
+    type: String,
+    minlength: 2,
+    maxlength: 30,
+  },
   email: {
     validate: {
       validator: (email) => validator.isEmail(email),
@@ -16,13 +22,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     select: false,
-  },
-  name: {
-    required: true,
-    type: String,
-    minlength: 2,
-    maxlength: 30,
-  },
+  }
 });
 
 function deletePasswordFromUser() {

@@ -3,14 +3,12 @@ const { celebrate, Joi } = require('celebrate');
 const userRouter = require('./users');
 const movieRouter = require('./movies');
 const auth = require('../middlewares/auth');
-//const { createUser, login } = require('../controllers/users');
-//const NOT_FOUND = require('../errors/NotFoundError');
+const { createUser, login } = require('../controllers/users');
+const NOT_FOUND = require('../errors/NotFoundError');
 
 router.post('/signup', celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),
-    about: Joi.string().min(2).max(30),
-    avatar: Joi.string().pattern(/(http(s)?:\/\/)?(www\.)?[A-Za-zА-Яа-я0-9-]*\.[A-Za-zА-Яа-я0-9-]{2,8}(\/?[\wа-яА-Я#!:.?+=&%@!_~[\]$'*+,;=()-]*)*/),
     email: Joi.string().email().required(),
     password: Joi.string().required(),
   }),
