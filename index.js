@@ -30,13 +30,13 @@ const options = {
 
 mongoose.connect(NODE_ENV === 'production'? MONGO_ADR : 'mongodb://localhost:27017/moviesdb');
 app.use(express.json());
-//app.use('*', cors(options));
+app.use('*', cors(options));
 app.use(requestLogger);
-/*app.get('/crash-test', () => {
+app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
-});*/
+});
 app.use(router);
 app.use(errorLogger);
 
