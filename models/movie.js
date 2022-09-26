@@ -15,7 +15,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
   },
   year:{
-    type: Date,
+    type: String,
     required: true,
   },
   description: {
@@ -45,7 +45,7 @@ const movieSchema = new mongoose.Schema({
   },
   owner:{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'movie',
+    ref: 'user',
     required: true,
   },
   movieId:{

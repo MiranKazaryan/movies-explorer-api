@@ -1,32 +1,34 @@
-require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose');
-const { errors } = require('celebrate');
+require("dotenv").config();
+const express = require("express");
+const mongoose = require("mongoose");
+const { errors } = require("celebrate");
 //const cors = require('cors');
-const router = require('./routes/index');
-const { requestLogger, errorLogger } = require('./middlewares/logger');
+const router = require("./routes/index");
+const { requestLogger, errorLogger } = require("./middlewares/logger");
 
-const { PORT = 3000 } = process.env;
+const {
+  PORT = 3000, MONGO_ADR, NODE_ENV
+} = process.env;
 const app = express();
 
-console.log('enviroment', process.env.NODE_ENV);
+console.log("enviroment", process.env.NODE_ENV);
 
-/*const options = {
+const options = {
   origin: [
     'http://localhost:3010',
-    'https://mrnkzrn.nomoredomains.sbs',
-    'https://mirankazaryan.github.io',
-    'http://mrnkzrn.nomoredomains.sbs',
-    'http://mirankazaryan.github.io',
+    'https://api.mrnkzrn.nomorepartiesxyz.ru',
+    'https://mrnkzrn.nomorepartiesxyz.ru',
+    'http://api.mrnkzrn.nomorepartiesxyz.ru',
+    'http://mrnkzrn.nomorepartiesxyz.ru',
   ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   preflightContinue: false,
   optionsSuccessStatus: 204,
   allowedHeaders: ['Content-Type', 'origin', 'Authorization'],
   credentials: true,
-};*/
+};
 
-mongoose.connect('mongodb://localhost:27017/moviedb');
+mongoose.connect(NODE_ENV === 'production'? MONGO_ADR : 'mongodb://localhost:27017/moviesdb');
 app.use(express.json());
 //app.use('*', cors(options));
 app.use(requestLogger);
@@ -44,7 +46,7 @@ app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;
 
   res.status(statusCode).send({
-    message: statusCode === 500 ? 'На сервере произошла ошибка' : message,
+    message: statusCode === 500 ? "На сервере произошла ошибка" : message,
   });
   next();
 });

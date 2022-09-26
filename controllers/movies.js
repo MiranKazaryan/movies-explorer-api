@@ -11,10 +11,11 @@ const getMovies = (req, res, next) => {
 };
 // создание карточки
 const createMovie = (req, res, next) => {
-  const { country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId } = req.body;
-  Movie.create({ country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId, owner: req.user._id })
+  const { country, director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail, movieId } = req.body;
+  Movie.create({ country, director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail, movieId, owner: req.user._id })
     .then((movie) => res.status(201).send(movie))
     .catch((e) => {
+      console.log(e);
       if (e.name === 'ValidationError') {
         next(new BAD_REQUEST('Error validating movie'));
       } else {
@@ -24,7 +25,7 @@ const createMovie = (req, res, next) => {
 };
 // удаление карточек
 const deleteMovie = (req, res, next) => {
-  Movie.findById(req.params.movieId)
+  Movie.findById(req.params._id)
     .orFail(() => {
       throw new NOT_FOUND('Movie not found');
     })
