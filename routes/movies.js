@@ -4,7 +4,7 @@ const { celebrate, Joi } = require('celebrate');
 const {
   getMovies,
   createMovie,
-  deleteMovie
+  deleteMovie,
 } = require('../controllers/movies');
 
 movieRouter.get('/', getMovies);
@@ -16,28 +16,22 @@ movieRouter.post('/', celebrate({
     duration: Joi.number().required(),
     year: Joi.string().required().min(2).max(30),
     description: Joi.string().required().min(2),
-    image: Joi.string()
-    .required()
-    .pattern(
+    image: Joi.string().required().pattern(
       /(http(s)?:\/\/)?(www\.)?[A-Za-zА-Яа-я0-9-]*\.[A-Za-zА-Яа-я0-9-]{2,8}(\/?[\wа-яА-Я#!:.?+=&%@!_~[\]$'*+,;=()-]*)*/,
     ),
-    trailerLink: Joi.string()
-    .required()
-    .pattern(
+    trailerLink: Joi.string().required().pattern(
       /(http(s)?:\/\/)?(www\.)?[A-Za-zА-Яа-я0-9-]*\.[A-Za-zА-Яа-я0-9-]{2,8}(\/?[\wа-яА-Я#!:.?+=&%@!_~[\]$'*+,;=()-]*)*/,
     ),
     nameRU: Joi.string().required().min(1),
     nameEN: Joi.string().required().min(1),
-    thumbnail: Joi.string()
-    .required()
-    .pattern(
+    thumbnail: Joi.string().required().pattern(
       /(http(s)?:\/\/)?(www\.)?[A-Za-zА-Яа-я0-9-]*\.[A-Za-zА-Яа-я0-9-]{2,8}(\/?[\wа-яА-Я#!:.?+=&%@!_~[\]$'*+,;=()-]*)*/,
     ),
     movieId: Joi.number().required(),
   }),
 }), createMovie);
 
-movieRouter.delete('/:_id',celebrate({
+movieRouter.delete('/:_id', celebrate({
   params: Joi.object().keys({
     _id: Joi.string().length(24).hex().required(),
   }),
