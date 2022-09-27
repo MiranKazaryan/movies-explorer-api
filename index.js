@@ -16,9 +16,9 @@ console.log("enviroment", process.env.NODE_ENV);
 const options = {
   origin: [
     'http://localhost:3010',
-    'https://api.mrnkzrn.nomorepartiesxyz.ru',
+    'https://mrnkzrn.hopto.org/',
     'https://mrnkzrn.nomorepartiesxyz.ru',
-    'http://api.mrnkzrn.nomorepartiesxyz.ru',
+    'http://mrnkzrn.hopto.org/',
     'http://mrnkzrn.nomorepartiesxyz.ru',
   ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
