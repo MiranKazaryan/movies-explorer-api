@@ -34,7 +34,6 @@ const movieSchema = new mongoose.Schema({
     validate: {
       validator: (trailer) => validator.isURL(trailer),
     },
-    required: true,
   },
   thumbnail: {
     type: String,
@@ -58,7 +57,6 @@ const movieSchema = new mongoose.Schema({
   },
   nameEN: {
     type: String,
-    required: true,
   },
 });
 
