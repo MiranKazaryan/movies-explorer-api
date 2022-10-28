@@ -19,11 +19,11 @@ movieRouter.post('/', celebrate({
     image: Joi.string().required().pattern(
       /(http(s)?:\/\/)?(www\.)?[A-Za-zА-Яа-я0-9-]*\.[A-Za-zА-Яа-я0-9-]{2,8}(\/?[\wа-яА-Я#!:.?+=&%@!_~[\]$'*+,;=()-]*)*/,
     ),
-    trailerLink: Joi.string().required().pattern(
+    trailerLink: Joi.string().pattern(
       /(http(s)?:\/\/)?(www\.)?[A-Za-zА-Яа-я0-9-]*\.[A-Za-zА-Яа-я0-9-]{2,8}(\/?[\wа-яА-Я#!:.?+=&%@!_~[\]$'*+,;=()-]*)*/,
     ),
     nameRU: Joi.string().required().min(1),
-    nameEN: Joi.string().required().min(1),
+    nameEN: Joi.string().min(1),
     thumbnail: Joi.string().required().pattern(
       /(http(s)?:\/\/)?(www\.)?[A-Za-zА-Яа-я0-9-]*\.[A-Za-zА-Яа-я0-9-]{2,8}(\/?[\wа-яА-Я#!:.?+=&%@!_~[\]$'*+,;=()-]*)*/,
     ),
