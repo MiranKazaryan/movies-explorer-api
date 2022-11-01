@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const validator = require('validator');
+const mongoose = require("mongoose");
+const validator = require("validator");
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -44,7 +44,7 @@ const movieSchema = new mongoose.Schema({
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
+    ref: "user",
     required: true,
   },
   movieId: {
@@ -59,5 +59,5 @@ const movieSchema = new mongoose.Schema({
     type: String,
   },
 });
-
-module.exports = mongoose.model('movie', movieSchema);
+movieSchema.index({ owner: 1, movieId: 1 }, { unique: true });
+module.exports = mongoose.model("movie", movieSchema);
